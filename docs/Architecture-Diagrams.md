@@ -435,33 +435,3 @@ graph TB
     APIM --> AS
     Storage --> CDN
 ```
-
-## Diagram Generation Instructions
-
-To generate PNG diagrams from these Mermaid diagrams:
-
-1. **Online Tools:**
-   - Visit https://mermaid.live/
-   - Copy each diagram code
-   - Export as PNG
-
-2. **VS Code Extension:**
-   - Install "Mermaid Preview" extension
-   - Open this file and preview diagrams
-   - Export to PNG
-
-3. **Command Line:**
-   ```bash
-   npm install -g @mermaid-js/mermaid-cli
-   mmdc -i diagram.mmd -o diagram.png
-   ```
-
-Each diagram illustrates different aspects of the Cab Service architecture:
-
-- **Architecture Diagram**: Overall system structure
-- **Event Flow**: How events flow through the system
-- **Booking Flow**: Complete user journey
-- **Data Flow**: How data moves through layers
-- **Security Flow**: Authentication and authorization
-- **Real-time Flow**: Live communication patterns
-- **Infrastructure**: Azure services layout
