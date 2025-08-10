@@ -336,11 +336,11 @@ graph TB
     end
     
     subgraph "API Gateway"
-        APIM[API Management<br/>JWT Validation]
+        APIM[API Management<br/>JWT Validation<br/>Rate Limits<br/>API Policies]
     end
     
     subgraph "Microservices"
-        Services[Protected APIs<br/>Role-based Authorization]
+        Services[Protected APIs<br/>Role-based Authorization<br/>Passenger, Driver, Admin]
     end
     
     React --> AAD
@@ -352,9 +352,6 @@ graph TB
     Mobile --> APIM
     
     APIM --> Services
-    
-    Note over APIM: "Validates JWT tokens<br/>Enforces rate limits<br/>API policies"
-    Note over Services: "Role-based access<br/>Passenger, Driver, Admin"
 ```
 
 ## 6. Real-time Communication Flow
