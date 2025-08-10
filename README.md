@@ -305,7 +305,6 @@ yarn test
 ### **Architecture Diagrams**
 - [System Architecture](docs/Architecture-Diagrams.md)
 - [API Endpoint Flows](docs/Endpoint-Calling-Diagrams.md)
-- [Database Design](docs/Database-Schema.md)
 
 ### **API Documentation**
 - Swagger UI available at `/swagger` on each service
