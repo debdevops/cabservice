@@ -1,0 +1,41 @@
+graph TD
+    subgraph "Frontend Clients"
+        PA[Passenger App]
+        DA[Driver App]
+        Admin[Admin Dashboard]
+    end
+    
+    subgraph "SignalR Hub"
+        Hub[Notification Hub]
+        CM[Connection Manager]
+        GM[Group Manager]
+    end
+    
+    subgraph "Notification Service"
+        NS[Notification Service]
+        RT[Real-time Service]
+    end
+    
+    subgraph "Event Sources"
+        BS[Booking Service]
+        PS[Payment Service]
+        DS[Driver Service]
+    end
+    
+    PA -->|"Connect with JWT"| Hub
+    DA -->|"Connect with JWT"| Hub
+    Admin -->|"Connect with JWT"| Hub
+    
+    Hub -->|"Manage Connections"| CM
+    Hub -->|"Join Groups"| GM
+    
+    BS -->|"Booking Events"| NS
+    PS -->|"Payment Events"| NS
+    DS -->|"Driver Events"| NS
+    
+    NS -->|"Real-time Updates"| RT
+    RT -->|"Send to Groups"| Hub
+    
+    Hub -.->|"Booking Updates"| PA
+    Hub -.->|"Trip Requests"| DA
+    Hub -.->|"System Alerts"| Admin

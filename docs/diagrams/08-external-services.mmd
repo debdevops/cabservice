@@ -1,0 +1,35 @@
+graph TD
+    subgraph "CabService Microservices"
+        PS[Payment Service]
+        NS[Notification Service]
+    end
+    
+    subgraph "Stripe Integration"
+        PS -->|"POST /v1/charges"| Stripe[Stripe API]
+        PS -->|"POST /v1/refunds"| Stripe
+        PS -->|"GET /v1/charges/{id}"| Stripe
+        Stripe -->|"Webhook Events"| PS
+    end
+    
+    subgraph "SendGrid Integration"
+        NS -->|"POST /v3/mail/send"| SendGrid[SendGrid API]
+        NS -->|"GET /v3/templates"| SendGrid
+        SendGrid -->|"Email Status"| NS
+    end
+    
+    subgraph "Twilio Integration"
+        NS -->|"POST /Messages"| Twilio[Twilio API]
+        NS -->|"GET /Messages/{sid}"| Twilio
+        Twilio -->|"SMS Status"| NS
+    end
+    
+    subgraph "Firebase Integration"
+        NS -->|"POST /fcm/send"| Firebase[Firebase FCM]
+        NS -->|"POST /fcm/send (batch)"| Firebase
+        Firebase -->|"Push Status"| NS
+    end
+    
+    style Stripe fill:#635bff
+    style SendGrid fill:#1a82e2
+    style Twilio fill:#f22f46
+    style Firebase fill:#ffca28

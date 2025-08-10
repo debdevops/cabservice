@@ -1,0 +1,78 @@
+Microsoft Visual Studio Solution File, Format Version 12.00
+# Visual Studio Version 17
+VisualStudioVersion = 17.0.31903.59
+MinimumVisualStudioVersion = 10.0.40219.1
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "src", "src", "{8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Services", "Services", "{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Shared", "Shared", "{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Functions", "Functions", "{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Frontend", "Frontend", "{B5E9BD75-E68E-40B6-B866-DA7E0E7E1611}"
+EndProject
+Project("{2150E333-8FDC-42A3-9474-1A3956D46DE8}") = "Infrastructure", "Infrastructure", "{C1C2E181-A33C-4C7A-83F4-4F2E4A2E4A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabService.Shared", "src\Shared\CabService.Shared\CabService.Shared.csproj", "{1B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabService.PassengerService", "src\Services\CabService.PassengerService\CabService.PassengerService.csproj", "{2B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabService.DriverService", "src\Services\CabService.DriverService\CabService.DriverService.csproj", "{3B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabService.BookingService", "src\Services\CabService.BookingService\CabService.BookingService.csproj", "{4B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabService.PaymentService", "src\Services\CabService.PaymentService\CabService.PaymentService.csproj", "{5B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabService.NotificationService", "src\Services\CabService.NotificationService\CabService.NotificationService.csproj", "{6B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "CabService.Functions", "src\Functions\CabService.Functions\CabService.Functions.csproj", "{7B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{1B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{1B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{1B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{1B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{2B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{2B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{2B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{2B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{3B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{3B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{3B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{3B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{4B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{4B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{4B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{4B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{5B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{5B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{5B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{5B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{6B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{6B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{6B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{6B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+		{7B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{7B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{7B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{7B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(NestedProjects) = preSolution
+		{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}
+		{6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}
+		{A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3} = {8BC9CEB8-8B4A-11D0-8D11-00A0C91BC942}
+		{1B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E} = {6EC3EE1D-3C4E-46DD-8F32-0CC8E7565705}
+		{2B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E} = {FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}
+		{3B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E} = {FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}
+		{4B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E} = {FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}
+		{5B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E} = {FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}
+		{6B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E} = {FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}
+		{7B2CA3A0-7AC3-4C14-8F6C-5A2E4A2E4A2E} = {A2FE74E1-B743-11D0-AE1A-00A0C90FFFC3}
+	EndGlobalSection
+EndGlobal

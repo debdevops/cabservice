@@ -1,0 +1,62 @@
+sequenceDiagram
+    participant PA as Passenger App
+    participant APIM as API Gateway
+    participant BS as Booking Service
+    participant DS as Driver Service
+    participant PS as Payment Service
+    participant NS as Notification Service
+    participant SB as Service Bus
+    participant DA as Driver App
+    participant Stripe as Stripe API
+    
+    Note over PA: User requests ride
+    PA->>APIM: POST /api/bookings/estimate-fare
+    APIM->>BS: Calculate fare estimate
+    BS->>PA: Return fare estimate
+    
+    PA->>APIM: POST /api/bookings
+    APIM->>BS: Create booking request
+    BS->>DS: GET /api/drivers/nearby
+    DS->>BS: Return available drivers
+    BS->>SB: Publish BookingCreated event
+    BS->>PA: Return booking confirmation
+    
+    SB->>NS: BookingCreated event received
+    NS->>PA: Send confirmation (SignalR)
+    NS->>DA: Send booking request (Push notification)
+    
+    Note over DA: Driver accepts booking
+    DA->>APIM: PUT /api/bookings/{id}/accept
+    APIM->>BS: Accept booking
+    BS->>SB: Publish BookingAccepted event
+    BS->>DA: Return acceptance confirmation
+    
+    SB->>NS: BookingAccepted event received
+    NS->>PA: Driver assigned (SignalR)
+    NS->>DA: Booking confirmed (Push)
+    
+    Note over DA: Driver starts trip
+    DA->>APIM: PUT /api/bookings/{id}/start
+    APIM->>BS: Start trip
+    BS->>SB: Publish TripStarted event
+    
+    SB->>NS: TripStarted event received
+    NS->>PA: Trip started (SignalR)
+    
+    Note over DA: Driver completes trip
+    DA->>APIM: PUT /api/bookings/{id}/complete
+    APIM->>BS: Complete trip
+    BS->>SB: Publish TripCompleted event
+    
+    SB->>PS: TripCompleted event received
+    PS->>Stripe: Process payment
+    Stripe->>PS: Payment response
+    PS->>SB: Publish PaymentProcessed event
+    
+    SB->>NS: PaymentProcessed event received
+    NS->>PA: Payment confirmation (Email + SMS)
+    NS->>DA: Payment processed (Push)
+    
+    PA->>APIM: PUT /api/bookings/{id}/rate
+    APIM->>BS: Submit rating
+    BS->>PA: Rating confirmation

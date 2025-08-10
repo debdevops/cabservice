@@ -1,0 +1,35 @@
+graph LR
+    subgraph "Event Publishers"
+        PS[Passenger Service]
+        DS[Driver Service]
+        BS[Booking Service]
+        PayS[Payment Service]
+    end
+    
+    subgraph "Azure Service Bus"
+        BE[booking-events]
+        PE[payment-events]
+        DE[driver-events]
+        NE[notification-events]
+    end
+    
+    subgraph "Event Subscribers"
+        NS[Notification Service]
+        AF[Azure Functions]
+        EH[Event Handlers]
+    end
+    
+    PS --> BE
+    DS --> DE
+    BS --> BE
+    PayS --> PE
+    
+    BE --> NS
+    PE --> NS
+    DE --> NS
+    BE --> AF
+    PE --> AF
+    DE --> AF
+    
+    NS --> NE
+    AF --> EH

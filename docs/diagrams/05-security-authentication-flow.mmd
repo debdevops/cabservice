@@ -1,0 +1,27 @@
+graph TB
+    subgraph "Client Applications"
+        React[React App]
+        Mobile[Mobile Apps]
+    end
+    
+    subgraph "Identity Provider"
+        AAD[Azure AD/Entra ID]
+    end
+    
+    subgraph "API Gateway"
+        APIM[API Management<br/>JWT Validation]
+    end
+    
+    subgraph "Microservices"
+        Services[Protected APIs<br/>Role-based Authorization]
+    end
+    
+    React --> AAD
+    Mobile --> AAD
+    AAD --> React
+    AAD --> Mobile
+    
+    React --> APIM
+    Mobile --> APIM
+    
+    APIM --> Services

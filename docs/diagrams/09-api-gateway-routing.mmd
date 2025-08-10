@@ -1,0 +1,43 @@
+graph TD
+    subgraph "Client Applications"
+        React[React Frontend]
+        Mobile[Mobile Apps]
+        Postman[API Testing]
+    end
+    
+    subgraph "Azure API Management"
+        APIM[API Gateway]
+        Auth[Authentication]
+        Rate[Rate Limiting]
+        Cache[Response Caching]
+        Log[Request Logging]
+    end
+    
+    subgraph "Backend Services"
+        PS[Passenger Service<br/>:7001]
+        DS[Driver Service<br/>:7002]
+        BS[Booking Service<br/>:7003]
+        PayS[Payment Service<br/>:7004]
+        NS[Notification Service<br/>:7005]
+    end
+    
+    React --> APIM
+    Mobile --> APIM
+    Postman --> APIM
+    
+    APIM --> Auth
+    Auth --> Rate
+    Rate --> Cache
+    Cache --> Log
+    
+    Log -->|"Route: /api/passengers/*"| PS
+    Log -->|"Route: /api/drivers/*"| DS
+    Log -->|"Route: /api/bookings/*"| BS
+    Log -->|"Route: /api/payments/*"| PayS
+    Log -->|"Route: /api/notifications/*"| NS
+    
+    style APIM fill:#0078d4
+    style Auth fill:#107c10
+    style Rate fill:#d83b01
+    style Cache fill:#5c2d91
+    style Log fill:#ca5010

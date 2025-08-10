@@ -1,0 +1,47 @@
+graph TD
+    subgraph "Notification Service"
+        NC[Notification Controller]
+        NS[Notification Service]
+        ES[Email Service]
+        SMS[SMS Service]
+        PNS[Push Notification Service]
+        TS[Template Service]
+    end
+    
+    subgraph "External Services"
+        SendGrid[SendGrid API]
+        Twilio[Twilio API]
+        Firebase[Firebase FCM]
+    end
+    
+    subgraph "Azure Service Bus"
+        SB[Service Bus Subscriptions]
+    end
+    
+    subgraph "SignalR Hub"
+        Hub[Notification Hub]
+    end
+    
+    SB -->|"BookingCreated Event"| NS
+    SB -->|"BookingAccepted Event"| NS
+    SB -->|"TripCompleted Event"| NS
+    SB -->|"PaymentProcessed Event"| NS
+    
+    NS -->|"Get Template"| TS
+    TS -->|"Processed Template"| NS
+    
+    NS -->|"Send Email"| ES
+    ES -->|"POST /v3/mail/send"| SendGrid
+    
+    NS -->|"Send SMS"| SMS
+    SMS -->|"POST /Messages"| Twilio
+    
+    NS -->|"Send Push"| PNS
+    PNS -->|"POST /fcm/send"| Firebase
+    
+    NS -->|"Real-time Update"| Hub
+    Hub -.->|"SignalR"| Client[Frontend Clients]
+    
+    NC -->|"SendNotificationAsync"| NS
+    NC -->|"SendBulkNotificationsAsync"| NS
+    NC -->|"ScheduleNotificationAsync"| NS

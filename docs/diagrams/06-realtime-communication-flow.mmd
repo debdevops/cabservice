@@ -1,0 +1,36 @@
+graph LR
+    subgraph "Event Sources"
+        BS[Booking Service]
+        DS[Driver Service]
+        PS[Payment Service]
+    end
+    
+    subgraph "Event Processing"
+        SB[Service Bus]
+        NS[Notification Service]
+    end
+    
+    subgraph "Real-time Delivery"
+        SignalR[SignalR Hubs]
+        Push[Push Notifications]
+        Email[Email/SMS]
+    end
+    
+    subgraph "Client Applications"
+        Web[Web App]
+        Mobile[Mobile Apps]
+    end
+    
+    BS --> SB
+    DS --> SB
+    PS --> SB
+    
+    SB --> NS
+    NS --> SignalR
+    NS --> Push
+    NS --> Email
+    
+    SignalR --> Web
+    Push --> Mobile
+    Email --> Web
+    Email --> Mobile

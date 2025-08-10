@@ -1,0 +1,38 @@
+graph TD
+    subgraph "Booking Service"
+        BC[Booking Controller]
+        BS[Booking Service]
+        DMS[Driver Matching Service]
+        FCS[Fare Calculation Service]
+    end
+    
+    subgraph "External Services"
+        DS[Driver Service]
+        PS[Payment Service]
+        NS[Notification Service]
+    end
+    
+    subgraph "Azure Service Bus"
+        SB[Service Bus Topics]
+    end
+    
+    BC -->|"CreateBookingAsync"| BS
+    BS -->|"FindNearbyDriversAsync"| DMS
+    DMS -->|"GET /api/drivers/nearby"| DS
+    DS -->|"Available Drivers List"| DMS
+    DMS -->|"Driver List"| BS
+    
+    BS -->|"CalculateFareAsync"| FCS
+    FCS -->|"Fare Amount"| BS
+    
+    BS -->|"Publish BookingCreated"| SB
+    SB -->|"BookingCreated Event"| NS
+    
+    BC -->|"AcceptBookingAsync"| BS
+    BS -->|"Publish BookingAccepted"| SB
+    SB -->|"BookingAccepted Event"| NS
+    
+    BC -->|"CompleteBookingAsync"| BS
+    BS -->|"Publish TripCompleted"| SB
+    SB -->|"TripCompleted Event"| PS
+    SB -->|"TripCompleted Event"| NS

@@ -1,0 +1,33 @@
+sequenceDiagram
+    participant P as Passenger App
+    participant API as API Management
+    participant BS as Booking Service
+    participant DS as Driver Service
+    participant PS as Payment Service
+    participant NS as Notification Service
+    participant SB as Service Bus
+    participant AF as Azure Functions
+    
+    P->>API: Request Ride
+    API->>BS: Create Booking
+    BS->>SB: Publish BookingRequested Event
+    SB->>NS: Notify Passenger
+    SB->>AF: Trigger Driver Matching
+    
+    AF->>DS: Find Nearby Drivers
+    DS->>AF: Return Available Drivers
+    AF->>BS: Assign Best Driver
+    BS->>SB: Publish BookingAccepted Event
+    
+    SB->>NS: Notify Passenger & Driver
+    NS->>P: Real-time Notification
+    
+    Note over DS: Driver arrives & starts trip
+    DS->>SB: Publish TripStarted Event
+    SB->>NS: Notify Passenger
+    
+    Note over DS: Trip completed
+    DS->>SB: Publish TripCompleted Event
+    SB->>PS: Trigger Payment
+    PS->>SB: Publish PaymentProcessed Event
+    SB->>NS: Notify All Parties

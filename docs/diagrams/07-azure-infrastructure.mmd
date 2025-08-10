@@ -1,0 +1,33 @@
+graph TB
+    subgraph "Azure Resource Group"
+        subgraph "Compute Services"
+            AS[App Services<br/>5 Microservices]
+            AF[Azure Functions<br/>Background Processing]
+        end
+        
+        subgraph "Data Services"
+            Cosmos[(Cosmos DB<br/>Multi-database)]
+            SB[Service Bus<br/>Event Messaging]
+        end
+        
+        subgraph "Web Services"
+            APIM[API Management<br/>Gateway]
+            Storage[Storage Account<br/>Static Website]
+            CDN[CDN<br/>Global Distribution]
+        end
+        
+        subgraph "Security & Monitoring"
+            KV[Key Vault<br/>Secrets]
+            AI[Application Insights<br/>Monitoring]
+            AAD[Azure AD<br/>Authentication]
+        end
+    end
+    
+    AS --> Cosmos
+    AS --> SB
+    AS --> KV
+    AS --> AI
+    AF --> Cosmos
+    AF --> SB
+    APIM --> AS
+    Storage --> CDN

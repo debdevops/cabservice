@@ -1,0 +1,41 @@
+graph TD
+    subgraph "User Interfaces"
+        PA[Passenger App]
+        DA[Driver App]
+    end
+    
+    subgraph "API Layer"
+        APIM[API Management Gateway]
+    end
+    
+    subgraph "Business Logic"
+        MS[Microservices]
+    end
+    
+    subgraph "Event Processing"
+        SB[Service Bus]
+        AF[Azure Functions]
+    end
+    
+    subgraph "Data Storage"
+        DB[(Cosmos DB)]
+        Cache[Redis Cache]
+    end
+    
+    subgraph "External APIs"
+        Maps[Maps API]
+        Payment[Payment Gateway]
+        Comm[Communication APIs]
+    end
+    
+    PA --> APIM
+    DA --> APIM
+    APIM --> MS
+    MS --> SB
+    SB --> AF
+    AF --> DB
+    MS --> DB
+    MS --> Cache
+    MS --> Maps
+    MS --> Payment
+    MS --> Comm

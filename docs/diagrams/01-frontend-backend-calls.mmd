@@ -1,0 +1,45 @@
+graph TD
+    subgraph "React Frontend"
+        PA[Passenger App]
+        API[API Service]
+        SignalR[SignalR Service]
+    end
+    
+    subgraph "API Gateway"
+        APIM[Azure API Management]
+    end
+    
+    subgraph "Microservices"
+        PS[Passenger Service]
+        DS[Driver Service]
+        BS[Booking Service]
+        PayS[Payment Service]
+        NS[Notification Service]
+    end
+    
+    PA -->|"POST /api/passengers<br/>Register"| API
+    PA -->|"GET /api/passengers/{id}<br/>Get Profile"| API
+    PA -->|"PUT /api/passengers/{id}<br/>Update Profile"| API
+    PA -->|"POST /api/passengers/{id}/verify<br/>Verify Identity"| API
+    
+    PA -->|"POST /api/bookings<br/>Create Booking"| API
+    PA -->|"GET /api/bookings/{id}<br/>Get Booking"| API
+    PA -->|"PUT /api/bookings/{id}/cancel<br/>Cancel Booking"| API
+    PA -->|"GET /api/bookings/passenger/{id}<br/>Get My Bookings"| API
+    PA -->|"POST /api/bookings/estimate-fare<br/>Calculate Fare"| API
+    PA -->|"PUT /api/bookings/{id}/rate<br/>Rate Trip"| API
+    
+    PA -->|"POST /api/payments<br/>Process Payment"| API
+    PA -->|"GET /api/payments/passenger/{id}<br/>Payment History"| API
+    
+    PA -->|"GET /api/notifications/user/{id}<br/>Get Notifications"| API
+    PA -->|"PUT /api/notifications/{id}/read<br/>Mark as Read"| API
+    PA -->|"GET /api/notifications/user/{id}/unread-count<br/>Unread Count"| API
+    
+    API --> APIM
+    APIM --> PS
+    APIM --> BS
+    APIM --> PayS
+    APIM --> NS
+    
+    SignalR -.->|"Real-time Updates"| NS

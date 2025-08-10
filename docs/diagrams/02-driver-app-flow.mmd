@@ -1,0 +1,43 @@
+graph TD
+    subgraph "React Frontend"
+        DA[Driver App]
+        API[API Service]
+        SignalR[SignalR Service]
+    end
+    
+    subgraph "API Gateway"
+        APIM[Azure API Management]
+    end
+    
+    subgraph "Microservices"
+        DS[Driver Service]
+        BS[Booking Service]
+        PayS[Payment Service]
+        NS[Notification Service]
+    end
+    
+    DA -->|"POST /api/drivers<br/>Register"| API
+    DA -->|"GET /api/drivers/{id}<br/>Get Profile"| API
+    DA -->|"PUT /api/drivers/{id}<br/>Update Profile"| API
+    DA -->|"POST /api/drivers/{id}/verify<br/>Verify Documents"| API
+    DA -->|"POST /api/drivers/{id}/status<br/>Update Availability"| API
+    DA -->|"POST /api/drivers/{id}/location<br/>Update Location"| API
+    DA -->|"GET /api/drivers/{id}/profile<br/>Get Detailed Profile"| API
+    
+    DA -->|"GET /api/bookings/driver/{id}<br/>Get My Bookings"| API
+    DA -->|"PUT /api/bookings/{id}/accept<br/>Accept Booking"| API
+    DA -->|"PUT /api/bookings/{id}/start<br/>Start Trip"| API
+    DA -->|"PUT /api/bookings/{id}/complete<br/>Complete Trip"| API
+    
+    DA -->|"GET /api/payments/driver/{id}<br/>Earnings History"| API
+    
+    DA -->|"GET /api/notifications/user/{id}<br/>Get Notifications"| API
+    DA -->|"PUT /api/notifications/{id}/read<br/>Mark as Read"| API
+    
+    API --> APIM
+    APIM --> DS
+    APIM --> BS
+    APIM --> PayS
+    APIM --> NS
+    
+    SignalR -.->|"Real-time Updates"| NS

@@ -1,0 +1,77 @@
+graph TB
+    subgraph "Frontend Layer"
+        ReactApp[React.js App<br/>Azure Storage + CDN]
+    end
+    
+    subgraph "API Gateway Layer"
+        APIM[Azure API Management<br/>Gateway]
+    end
+    
+    subgraph "Microservices Layer"
+        PS[Passenger Service<br/>Azure App Service]
+        DS[Driver Service<br/>Azure App Service]
+        BS[Booking Service<br/>Azure App Service]
+        PayS[Payment Service<br/>Azure App Service]
+        NS[Notification Service<br/>Azure App Service]
+    end
+    
+    subgraph "Event Processing Layer"
+        AF[Azure Functions<br/>Background Processing]
+        SB[Azure Service Bus<br/>Event Messaging]
+    end
+    
+    subgraph "Data Layer"
+        CosmosDB[(Azure Cosmos DB<br/>NoSQL Database)]
+        KV[Azure Key Vault<br/>Secrets Management]
+    end
+    
+    subgraph "External Services"
+        Stripe[Stripe<br/>Payment Gateway]
+        SendGrid[SendGrid<br/>Email Service]
+        Twilio[Twilio<br/>SMS Service]
+        Firebase[Firebase<br/>Push Notifications]
+    end
+    
+    subgraph "Monitoring Layer"
+        AI[Application Insights<br/>Monitoring & Telemetry]
+    end
+    
+    ReactApp --> APIM
+    APIM --> PS
+    APIM --> DS
+    APIM --> BS
+    APIM --> PayS
+    APIM --> NS
+    
+    PS --> SB
+    DS --> SB
+    BS --> SB
+    PayS --> SB
+    NS --> SB
+    
+    SB --> AF
+    AF --> CosmosDB
+    
+    PS --> CosmosDB
+    DS --> CosmosDB
+    BS --> CosmosDB
+    PayS --> CosmosDB
+    NS --> CosmosDB
+    
+    PayS --> Stripe
+    NS --> SendGrid
+    NS --> Twilio
+    NS --> Firebase
+    
+    PS --> KV
+    DS --> KV
+    BS --> KV
+    PayS --> KV
+    NS --> KV
+    
+    PS --> AI
+    DS --> AI
+    BS --> AI
+    PayS --> AI
+    NS --> AI
+    AF --> AI

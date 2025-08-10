@@ -1,0 +1,42 @@
+graph TD
+    subgraph "Azure Functions"
+        BTF[Booking Timeout Function]
+        PRF[Payment Retry Function]
+        DLF[Driver Location Function]
+    end
+    
+    subgraph "Timer Triggers"
+        T1[Timer: 5 min]
+        T2[Timer: 10 min]
+        T3[Timer: 2 min]
+    end
+    
+    subgraph "Microservices"
+        BS[Booking Service]
+        PS[Payment Service]
+        DS[Driver Service]
+        NS[Notification Service]
+    end
+    
+    subgraph "External Services"
+        Stripe[Stripe API]
+    end
+    
+    subgraph "Azure Cosmos DB"
+        DB[(Cosmos DB)]
+    end
+    
+    T1 -->|"Every 5 minutes"| BTF
+    BTF -->|"Query Expired Bookings"| DB
+    BTF -->|"Cancel Booking"| BS
+    BTF -->|"Send Timeout Notification"| NS
+    
+    T2 -->|"Every 10 minutes"| PRF
+    PRF -->|"Query Failed Payments"| DB
+    PRF -->|"Retry Payment"| Stripe
+    PRF -->|"Update Payment Status"| PS
+    PRF -->|"Send Retry Notification"| NS
+    
+    T3 -->|"Every 2 minutes"| DLF
+    DLF -->|"Query Stale Locations"| DB
+    DLF -->|"Remove Inactive Drivers"| DS
