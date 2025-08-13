@@ -194,7 +194,7 @@ graph TD
         NC[Notification Controller]
         NS[Notification Service]
         ES[Email Service]
-        SMS[SMS Service]
+        SMSS[SMS Service]
         PNS[Push Notification Service]
         TS[Template Service]
     end
@@ -213,29 +213,47 @@ graph TD
         Hub[Notification Hub]
     end
     
+    subgraph "Frontend Clients"
+        Client[Mobile & Web Apps]
+    end
+    
+    %% Event Processing Flow
     SB -->|"BookingCreated Event"| NS
     SB -->|"BookingAccepted Event"| NS
     SB -->|"TripCompleted Event"| NS
     SB -->|"PaymentProcessed Event"| NS
     
+    %% Template Processing
     NS -->|"Get Template"| TS
     TS -->|"Processed Template"| NS
     
+    %% Multi-Channel Delivery
     NS -->|"Send Email"| ES
-    ES -->|"POST /mail/send"| SendGrid
+    ES -->|"POST /v3/mail/send"| SendGrid
     
-    NS -->|"Send SMS"| SMS
-    SMS -->|"POST /messages"| Twilio
+    NS -->|"Send SMS"| SMSS
+    SMSS -->|"POST /2010-04-01/Accounts/{AccountSid}/Messages.json"| Twilio
     
     NS -->|"Send Push"| PNS
-    PNS -->|"POST /fcm/send"| Firebase
+    PNS -->|"POST /v1/projects/{project-id}/messages:send"| Firebase
     
+    %% Real-time Updates
     NS -->|"Real-time Update"| Hub
-    Hub -.->|"SignalR"| Client[Frontend Clients]
+    Hub -.->|"SignalR Connection"| Client
     
+    %% Controller Operations
     NC -->|"SendNotificationAsync"| NS
     NC -->|"SendBulkNotificationsAsync"| NS
     NC -->|"ScheduleNotificationAsync"| NS
+    
+    %% Styling
+    classDef serviceClass fill:#e1f5fe,stroke:#01579b,stroke-width:2px
+    classDef externalClass fill:#f3e5f5,stroke:#4a148c,stroke-width:2px
+    classDef hubClass fill:#e8f5e8,stroke:#1b5e20,stroke-width:2px
+    
+    class NC,NS,ES,SMSS,PNS,TS serviceClass
+    class SendGrid,Twilio,Firebase externalClass
+    class SB,Hub hubClass
 ```
 
 ## 4. Azure Functions Background Processing
