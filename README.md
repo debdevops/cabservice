@@ -347,4 +347,4 @@ The solution uses the following Azure services:
 
 **⭐ If you find this project helpful, please give it a star on GitHub!**
 
-*Built with ❤️ using .NET 8, React 18, Azure Cloud Services and Windsurf AI (Claude)*
+*Built with ❤️ using .NET 8, React 18, Azure Cloud Services and Windsurf (Claude)*
